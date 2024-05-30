@@ -20,9 +20,12 @@ class Game (QObject):
         super().__init__()
         
         # Init Model Time  
+        self.gameTime = 0
         self.gameTimeStart = time.time()      
+        self.lastUpdate = self.gameTimeStart
+        self.lastTimeDelta = 0
         
-        self.cg = CustomGame()
+        self.cg = CustomGame(self)
         
         # Connects for adding and removing items in View
         self.cg.sig_addItem.connect(self.sig_addItem.emit)
@@ -30,6 +33,12 @@ class Game (QObject):
         
         
     def update(self):
+        # Time
+        now = time.time()
+        self.gameTime = now - self.gameTimeStart
+        self.lastTimeDelta = now - self.lastUpdate
+        self.lastUpdate = now
+        
         self.cg.updateGame()
         self.sig_gameUpdate.emit(0)
 

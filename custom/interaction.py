@@ -1,7 +1,7 @@
 import time
 
 from PyQt5.Qt import QPen, QColor
-from PyQt5.QtWidgets import QGraphicsItem, QGraphicsRectItem, QGraphicsTextItem
+from PyQt5.QtWidgets import QGraphicsItem, QGraphicsRectItem, QGraphicsTextItem, QGraphicsSceneMouseEvent
 
 class Interaction():
     
@@ -21,7 +21,7 @@ class Interaction():
     def update(self):
         if(time.time() > self.endtime):
             self.alive = False
-
+            
 
 
 class InteractionItem(QGraphicsRectItem):
@@ -41,6 +41,12 @@ class InteractionItem(QGraphicsRectItem):
         rect.moveCenter(self.boundingRect().center())
         self.text.setPos(rect.topLeft())
         
+        
+    def mouseReleaseEvent(self, event: QGraphicsSceneMouseEvent):
+        self.i.alive = False
+        super().mouseReleaseEvent(event)
+        
+         
         
         
         

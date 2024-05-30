@@ -78,6 +78,16 @@ class SceneGameGraphics(QGraphicsScene):
     def set_statusText(self, text):
         self.itemText.setHtml("<p style='color:blue'>" + text + "</p>")
         
+        
+        
+    def mouseDoubleClickEvent(self, event: QGraphicsSceneMouseEvent) -> None:
+        # TODO: Fill
+        return super().mouseDoubleClickEvent(event)
+    
+            
+    def mouseReleaseEvent(self, event: QGraphicsSceneMouseEvent):
+        for i in self.items():   
+            i.mouseReleaseEvent(event)
 
 
 
@@ -94,5 +104,12 @@ class OverlayItem(QGraphicsRectItem):
     def mouseDoubleClickEvent(self, event: QGraphicsSceneMouseEvent) -> None:
 
         # TODO: To be filled
-
+        print("123")
+        
         return super().mouseDoubleClickEvent(event)
+    
+            
+    def mouseReleaseEvent(self, event: QGraphicsSceneMouseEvent):
+        print  ("hier")
+        self.i.alive = False
+        super().mouseReleaseEvent(event)

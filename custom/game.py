@@ -10,9 +10,10 @@ class CustomGame(QObject):
     sig_addItem = pyqtSignal(QGraphicsItem)
     sig_removeItem = pyqtSignal(QGraphicsItem)
     
-    def __init__(self):
+    def __init__(self, wrapperGame):
         super().__init__()
       
+        self.g = wrapperGame
         self.p = CustomPlayer()
         
         self.interactions = []
@@ -23,16 +24,27 @@ class CustomGame(QObject):
 
     def updateGame(self):
         self.p.me.calcUpdateChanges()
+        
+        # Interactions
         self.generateInteractions()
+        for i in self.interactions:
+            i.update()
+        self.removeDeadInteractions()
         
     
     
     def generateInteractions(self):
-        if(len(self.interactions) == 0):
+        if(len(self.interactions) == 0 and self.g.gameTime < 1):
             i = Interaction(name="Test", reactime=5, pos=[200,200], size=[100,50])
             self.interactions.append(i)
             self.sig_addItem.emit(i.item)
     
+    
+    def removeDeadInteractions(self):
+        for i in reversed(self.interactions):
+            if (not i.alive):
+                self.sig_removeItem.emit(i.item)
+                self.interactions.remove(i)
         
         
     def getInitWorldItems(self):
