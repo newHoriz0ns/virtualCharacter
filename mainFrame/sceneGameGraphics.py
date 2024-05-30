@@ -10,11 +10,14 @@ class SceneGameGraphics(QGraphicsScene):
     def __init__(self):
         super().__init__()
 
-        # Model Items
-        self.reloadItems()
+
+
+
 
         # Setze Fokus auf (centerOn durch testView)
         # self.set_centerItem(self.itemPlayer)
+        
+    
         
 
     def reloadItems(self):
@@ -36,7 +39,7 @@ class SceneGameGraphics(QGraphicsScene):
 
         # TODO: To be filled / adopted
 
-        self.imgTest = QImage("imgTest.bmp")
+        self.imgTest = QImage("player")
         item = QGraphicsPixmapItem(QPixmap.fromImage(self.imgTest))
         item.setPos(100 * SCALE_FACTOR, 100 * SCALE_FACTOR)
         self.addItem(item)
@@ -56,7 +59,6 @@ class SceneGameGraphics(QGraphicsScene):
 
     def update_graphicsScene(self):
         self.updateOverlay()
-
 
 
 

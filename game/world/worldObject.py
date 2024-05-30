@@ -2,6 +2,7 @@ class WorldObject():
     
     def __init__(self, pos):
         self.pos = pos
+        self.item = None
         
         
     def calcUpdateChanges(self):
@@ -10,13 +11,15 @@ class WorldObject():
         self._updateObjectSpecificBehaviour()
         self.frc = self._calcResultingForces()
         self.__updatePhysics()
+        self.item.setPos(self.pos[0], self.pos[1])
+        
         
         
     def applyUpdateChanges(self):
         # TODO: Use Changes Dict and apply to values
         pass
         
-        
+    
         
 
 

@@ -6,7 +6,7 @@ Use as super class for custom worlds
 
 class World():
     
-    def __init__(self, worldobjects):
+    def __init__(self, worldobjects=[]):
         self.wos = worldobjects
         
     

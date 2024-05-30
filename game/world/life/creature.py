@@ -4,7 +4,6 @@ class Creature(WorldObject):
     
     def __init__(self, pos):
         super().__init__(pos)
-        
         self.lifeEnergy = 100.0
         self.health = 100.0
         

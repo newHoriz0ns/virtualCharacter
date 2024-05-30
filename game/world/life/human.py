@@ -1,4 +1,4 @@
-from creature import Creature
+from game.world.life.creature import Creature
 
 class Human(Creature):
     

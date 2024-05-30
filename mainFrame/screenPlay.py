@@ -57,8 +57,17 @@ class ScreenPlay(Screen):
         
     
     def startGame(self):
-        time.sleep(3)
         self.game = Game()
+        self.weltView.setGame(self.game)
+        
+        # Add and Remove Items
+        self.game.sig_addItem.connect(self.weltView.addItem)
+        self.game.sig_removeItem.connect(self.weltView.removeItem)
+        
+        # Load items at start of game
+        self.game.initWorldItems()
+    
+    
     
     
     def loadGame(self, sav):
