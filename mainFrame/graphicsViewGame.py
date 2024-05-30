@@ -8,8 +8,6 @@ from mainFrame.sceneGameGraphics import SceneGameGraphics
 
 class WeltGraphicsViewWidget(QGraphicsView):
 
-    CONTINOUS_UPDATE = True
-    
     def __init__(self) -> None:
         super().__init__()
 
@@ -34,7 +32,7 @@ class WeltGraphicsViewWidget(QGraphicsView):
 
         # self.centerOn(self.wgs.centerItem())
 
-        self.lastUpdate = 0
+
 
 
 
@@ -48,26 +46,6 @@ class WeltGraphicsViewWidget(QGraphicsView):
         self.wgs.removeItem(item)
 
 
-    def init_updateRoutine(self):
-        """
-        Initialisierung durch Main
-        """
-        self.updateTimer = QTimer()
-        self.updateTimer.setTimerType(Qt.PreciseTimer)
-        self.updateTimer.setInterval(0) # Wird durch vsync gesteuert
-        self.updateTimer.timeout.connect(self.vlm.update_vlm, Qt.DirectConnection)
-        self.updateTimer.timeout.connect(self.game.update)
-
-        # StartUp Finished -> Start UpdateTimer
-        if(CONTINOUS_UPDATE):
-            window.init_updateRoutine()
-            window.start_updateRoutine()
-            
-            
-
-
-    def start_updateRoutine(self):
-        self.updateTimer.start()
 
 
 

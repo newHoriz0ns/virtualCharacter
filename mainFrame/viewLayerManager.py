@@ -137,7 +137,7 @@ class ViewLayerManager():
 
 
     def update_vlm(self):
-        self.vlPlay.updateView()
+        self.vPlay.updateView()
 
 
 ################

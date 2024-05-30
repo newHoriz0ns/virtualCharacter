@@ -21,7 +21,7 @@ class CustomGame(QObject):
 # Template Methods
 
     def updateGame(self):
-        print ("hier")
+        self.p.me.calcUpdateChanges()
         
         
     def getInitWorldItems(self):
@@ -30,3 +30,7 @@ class CustomGame(QObject):
 
     def handlePlayerInput(self, input):
         self.cg.handlePlayerInput(input)
+        
+        
+    def getQuickStats(self):
+        return {"pos": str(self.p.me.pos), "energy": f"{self.p.me.energy:.2f}"}

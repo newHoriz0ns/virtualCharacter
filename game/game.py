@@ -11,6 +11,8 @@ from custom.game import CustomGame
 
 class Game (QObject):
 
+    sig_gameUpdate = pyqtSignal(int)
+
     sig_addItem = pyqtSignal(QGraphicsItem)
     sig_removeItem = pyqtSignal(QGraphicsItem)
 
@@ -28,8 +30,12 @@ class Game (QObject):
         
         
     def update(self):
-        
         self.cg.updateGame()
+        self.sig_gameUpdate.emit(0)
+
+
+    def getQuickStats(self):
+        return self.cg.getQuickStats()
 
 
     def handlePlayerInput(self, input):

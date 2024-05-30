@@ -5,6 +5,7 @@ from PyQt5.QtWidgets import QGroupBox, QHBoxLayout, QVBoxLayout, QPushButton, QG
 from PyQt5.QtCore import Qt, pyqtSignal, QObject
 
 from mainFrame.graphicsViewGame import WeltGraphicsViewWidget
+from mainFrame.graphicsViewStats import StatsGraphicsViewWidget
 
 
 from mainFrame.screen import Screen
@@ -40,12 +41,21 @@ class ScreenPlay(Screen):
 
 
         ##############
-        # Center (Welt)
+        # Center (Game)
         
-        #qgs = QGraphicsScene()
-        #qgs.addRect(100,100,100,100,QPen(),QBrush(QColor(0,0,0)))
+        self.groupGame = QGroupBox()
+        self.layoutGame = QVBoxLayout()
+        self.groupGame.setLayout(self.layoutGame)
+        self.mainLayout.addWidget(self.groupGame)
+        
+        # Welt
         self.weltView = WeltGraphicsViewWidget()
-        self.mainLayout.addWidget(self.weltView)
+        self.layoutGame.addWidget(self.weltView)
+        
+        # Bottom (Status & QuickItems)
+        self.statsView = StatsGraphicsViewWidget(10)
+        self.layoutGame.addWidget(self.statsView)
+
 
         ###############
         # Right Menu ?
@@ -59,10 +69,14 @@ class ScreenPlay(Screen):
     def startGame(self):
         self.game = Game()
         self.weltView.setGame(self.game)
+        self.statsView.setGame(self.game)
         
         # Add and Remove Items
         self.game.sig_addItem.connect(self.weltView.addItem)
         self.game.sig_removeItem.connect(self.weltView.removeItem)
+        
+        # React on Updates
+        self.game.sig_gameUpdate.connect(self.statsView.update)
         
         # Load items at start of game
         self.game.initWorldItems()
@@ -81,10 +95,11 @@ class ScreenPlay(Screen):
     def updateView (self):
         # WeltView
         self.weltView.update_graphicsView()
-        # Status
-        self.statusNameText.setText(self.m.getPlayer().name)
-        self.statusEnergieText.setText(str(self.m.getPlayer().energie))
+        # Stats
+        self.statsView.update()
 
+        if(self.game != None):
+            self.game.update()
 
 
     def saveModel(self):
