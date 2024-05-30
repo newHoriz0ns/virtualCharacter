@@ -40,6 +40,9 @@ class WeltGraphicsViewWidget(QGraphicsView):
         self.game = game
         
     def addItem(self, item: QGraphicsItem):
+        
+        print(item)
+        
         self.wgs.addItem(item)
         
     def removeItem(self, item: QGraphicsItem):
