@@ -51,5 +51,5 @@ class ScreenMenu(Screen):
         
         
     def on_setActive(self):
-        # self.mainWindow.setWindowState(Qt.WindowMaximized)
-        self.mainWindow.showFullScreen()
+        self.mainWindow.setWindowState(Qt.WindowMaximized)
+        # self.mainWindow.showFullScreen()

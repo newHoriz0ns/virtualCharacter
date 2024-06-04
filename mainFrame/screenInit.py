@@ -17,7 +17,7 @@ class ScreenInit(Screen):
         super().__init__(mainWindow)
 
         # background image
-        self.setStyleSheet('background-image:url("gfx/init/space.png"); background-repeat: no-repeat')
+        self.setStyleSheet('background-image:url("/gfx/init/space.png"); background-repeat: no-repeat')
         
         self.layout().setContentsMargins(0,0,0,0)
         self.setContentsMargins(0,0,0,0)
