@@ -18,6 +18,7 @@ class Interaction():
         self.item = InteractionItem(self)
         
         
+        
     def update(self):
         if(time.time() > self.endtime):
             self.alive = False
