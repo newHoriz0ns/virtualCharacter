@@ -27,19 +27,18 @@ class StatsGraphicsViewWidget(QGroupBox):
         
         
     def initStatItems(self):
-        
         for i, n in enumerate(self.game.getQuickStats()):
             self.statsNameMapping[n] = i
             self.statsItems[i].setLabel(n)
             
             
     def update(self):
-        
         if(self.game != None):
             qs = self.game.getQuickStats()
             for n in qs:
-                i = self.statsNameMapping[n]
-                self.statsItems[i].setValue(str(qs[n]))
+                if(n in self.statsNameMapping):
+                    i = self.statsNameMapping[n]
+                    self.statsItems[i].setValue(str(qs[n]))
             
         
         
